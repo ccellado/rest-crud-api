@@ -6,10 +6,28 @@ case class Node[A](left: Tree[A], value: A, right: Tree[A]) extends Tree[A]
 
 object TreeImpl {
 
-  def height[A](t: Tree[A]): Int = t match {
+  def height[A](t: Tree[A]): Int = {
+    def traverse[A](t: Tree[A]): Int = t match {
       case Leaf => 0
       case Node(left, _, right) =>
-        scala.math.max(height(left) + 1, height(right) + 1)
+        scala.math.max(traverse(left) + 1, traverse(right) + 1)
+    }
+    traverse(t) - 1
+  }
+
+  def preOrder[A](t: Tree[A]): List[A] = t match {
+    case Leaf => List()
+    case Node(left, x, right) => List(x) ::: preOrder(right) ::: preOrder(left)
+  }
+
+  def inOrder[A](t: Tree[A]): List[A] = t match {
+    case Leaf => List()
+    case Node(left, x, right) => inOrder(right) ::: List(x) ::: inOrder(left)
+  }
+
+  def postOrder[A](t: Tree[A]): List[A] = t match {
+    case Leaf => List()
+    case Node(left, x, right) => postOrder(right) ::: postOrder(left) ::: List(x)
   }
 
 }
