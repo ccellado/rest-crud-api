@@ -22,6 +22,8 @@ Using browser :
 1. ```GET /blog/?key=<asc | desc>&order=<createdat | editedat>``` - to show all posts, key and order to sort the result
 2. ```GET /blog/:id``` - get post at specific id
 
+With CURL :
+
 3. ```POST /blog``` - add a new blog entry, JSON format
 
 example:
