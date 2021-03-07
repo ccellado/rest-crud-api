@@ -1,4 +1,4 @@
-package FuncInterface
+package func
 
 object MonadList extends Monad[List] {
   def point[A](a: => A): List[A] = List(a)

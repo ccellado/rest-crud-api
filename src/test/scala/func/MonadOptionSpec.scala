@@ -1,4 +1,4 @@
-package FuncInterface
+package func
 
 import hedgehog._
 import hedgehog.runner._

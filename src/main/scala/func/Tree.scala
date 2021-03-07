@@ -1,4 +1,4 @@
-package FuncInterfacesealed
+package func
 
 trait Tree[+A]
 case object Leaf extends Tree[Nothing]
@@ -17,17 +17,17 @@ object TreeImpl {
 
   def preOrder[A](t: Tree[A]): List[A] = t match {
     case Leaf => List()
-    case Node(left, x, right) => List(x) ::: preOrder(right) ::: preOrder(left)
+    case Node(left, x, right) => List(x) ::: preOrder(left) ::: preOrder(right)
   }
 
   def inOrder[A](t: Tree[A]): List[A] = t match {
     case Leaf => List()
-    case Node(left, x, right) => inOrder(right) ::: List(x) ::: inOrder(left)
+    case Node(left, x, right) => inOrder(left) ::: List(x) ::: inOrder(right)
   }
 
   def postOrder[A](t: Tree[A]): List[A] = t match {
     case Leaf => List()
-    case Node(left, x, right) => postOrder(right) ::: postOrder(left) ::: List(x)
+    case Node(left, x, right) => postOrder(left) ::: postOrder(right) ::: List(x)
   }
 
 }

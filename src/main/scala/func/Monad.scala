@@ -1,4 +1,4 @@
-package FuncInterface
+package func
 
 trait Monad[M[_]] {
   def point[A](a: => A): M[A]

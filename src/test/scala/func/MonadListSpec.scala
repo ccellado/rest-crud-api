@@ -1,4 +1,4 @@
-package FuncInterface
+package func
 
 import hedgehog._
 import hedgehog.runner._
@@ -38,6 +38,8 @@ object MonadListSpec extends Properties {
       x <- Gen.string(Gen.char('a', 'z'),Range.linear(0, 100)).list(Range.linear(0, 100)).forAll
     } yield MonadList.flatMap(x, testFunc) ==== x.flatMap(testFunc)
   }
+
+
 }
 
 

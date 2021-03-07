@@ -1,4 +1,4 @@
-package FuncInterface
+package func
 
 object MonadOption extends Monad[Option] {
     def point[A](a: => A): Option[A] = Some(a)

@@ -1,6 +1,6 @@
-package FuncInterface
+package func
 
-import FuncInterfacesealed.{Leaf, Node, Tree, TreeImpl}
+import func.{Leaf, Node, Tree, TreeImpl}
 import hedgehog._
 import hedgehog.runner._
 
@@ -17,16 +17,16 @@ object TreeSpec extends Properties {
 
   val tree =
     Node(
-      Node(
-        Node(nodeVal(90), 70, nodeVal(66)),
-        50,
-        Node(nodeVal(44), 35, nodeVal(31))),
+        Node(
+          Node(nodeVal(4), 10, nodeVal(12)),
+          15,
+          Node(nodeVal(18), 22, nodeVal(24))),
       25,
-      Node(
-        Node(nodeVal(24), 22, nodeVal(18)),
-        15,
-        Node(nodeVal(12), 10, nodeVal(4)))
-    )
+        Node(
+          Node(nodeVal(31), 35, nodeVal(44)),
+          50,
+          Node(nodeVal(66), 70, nodeVal(90)))
+  )
 
   def testPoint: Result = {
     val size = 3
