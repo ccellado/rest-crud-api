@@ -19,7 +19,7 @@ sbt 'test:runMain blog.PopulateTables'
 
 Using browser :
 
-1. ```GET /blog/?key=<asc | desc>&order=<createdat | editedat>``` - to show all posts, key and order to sort the result
+1. ```GET /blog/?key=<asc|desc>&order=<createdat|editedat>``` - to show all posts, key and order to sort the result
 2. ```GET /blog/:id``` - get post at specific id
 
 With CURL :
@@ -39,4 +39,4 @@ example:
 curl -H 'Content-Type: application/json' -s -XPUT http://127.0.0.1:8080/blog/94 -d '{"title": "bookNew", "content": "contentNew", "tags": ["a", "c"], "author":"somenew"}'
 ```
 
-5. ```DELETE /blog:id``` - deletes a blog entry by id (cannot if there are duplicate id's present)
+5. ```DELETE /blog:id``` - deletes a blog entry by an id (cannot if there are duplicate id's present)

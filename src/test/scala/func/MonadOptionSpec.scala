@@ -6,10 +6,10 @@ import hedgehog.runner._
 object MonadOptionSpec extends Properties {
 
   def tests: List[Test] = List(
-        property("MonadOptionPoint", testPoint)
-      , property("MonadOptionmap", testMap)
-      , property("MonadOptionApplicative", testAp)
-      , property("MonadOptionFlatMap", testFMap)
+    property("MonadOptionPoint", testPoint),
+    property("MonadOptionmap", testMap),
+    property("MonadOptionApplicative", testAp),
+    property("MonadOptionFlatMap", testFMap)
   )
 
   def testPoint: Property =
@@ -38,5 +38,3 @@ object MonadOptionSpec extends Properties {
     } yield MonadOption.flatMap(Some(x), testFunc) ==== testFunc(x)
   }
 }
-
-

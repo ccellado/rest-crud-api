@@ -6,10 +6,10 @@ import hedgehog.runner._
 object MonadListSpec extends Properties {
 
   def tests: List[Test] = List(
-        property("MonadListPoint", testPoint)
-      , property("MonadListMap", testMap)
-      , property("MonadListApplicative", testAp)
-      , property("MonadListFlatMap", testFMap)
+    property("MonadListPoint", testPoint),
+    property("MonadListMap", testMap),
+    property("MonadListApplicative", testAp),
+    property("MonadListFlatMap", testFMap)
   )
 
   def testPoint: Property =
@@ -35,11 +35,8 @@ object MonadListSpec extends Properties {
   def testFMap: Property = {
     val testFunc = (x: String) => x.toList
     for {
-      x <- Gen.string(Gen.char('a', 'z'),Range.linear(0, 100)).list(Range.linear(0, 100)).forAll
+      x <- Gen.string(Gen.char('a', 'z'), Range.linear(0, 100)).list(Range.linear(0, 100)).forAll
     } yield MonadList.flatMap(x, testFunc) ==== x.flatMap(testFunc)
   }
 
-
 }
-
-
