@@ -23,12 +23,12 @@ trait RestApi {
       order: Option[String] = Some("desc")
   ) = {
     import ctx._
-    val q = quote { query[Blogpost] }
+    val q   = quote(query[Blogpost])
     val res = (key, order) match {
-      case (Some("asc"), Some("editedat"))   => quote { q.sortBy(_.id)(Ord.asc).sortBy(_.editedAt) }
-      case (Some("asc"), Some("createdat"))  => quote { q.sortBy(_.id)(Ord.asc).sortBy(_.createdAt) }
-      case (Some("desc"), Some("createdat")) => quote { q.sortBy(_.id)(Ord.desc).sortBy(_.createdAt) }
-      case (Some("desc"), Some("editedat"))  => quote { q.sortBy(_.id)(Ord.desc).sortBy(_.editedAt) }
+      case (Some("asc"), Some("editedat"))   => quote(q.sortBy(_.id)(Ord.asc).sortBy(_.editedAt))
+      case (Some("asc"), Some("createdat"))  => quote(q.sortBy(_.id)(Ord.asc).sortBy(_.createdAt))
+      case (Some("desc"), Some("createdat")) => quote(q.sortBy(_.id)(Ord.desc).sortBy(_.createdAt))
+      case (Some("desc"), Some("editedat"))  => quote(q.sortBy(_.id)(Ord.desc).sortBy(_.editedAt))
       case _                                 => q
     }
     ctx.transaction { implicit ex =>
@@ -47,7 +47,7 @@ trait RestApi {
   def insertPost(id: Int, post: PostEntry) = {
     import ctx._
     val time = System.currentTimeMillis
-    val res = Blogpost(id + 1, post.title, post.content, post.tags, time, time, post.author)
+    val res  = Blogpost(id + 1, post.title, post.content, post.tags, time, time, post.author)
 
     ctx.transaction { implicit ex =>
       ctx.run(query[Blogpost].insert(lift(res)))
@@ -62,10 +62,10 @@ trait RestApi {
         query[Blogpost]
           .filter(_.id == lift(id))
           .update(
-            _.title -> lift(post.title),
-            _.content -> lift(post.content),
-            _.tags -> lift(post.tags),
-            _.author -> lift(post.author),
+            _.title    -> lift(post.title),
+            _.content  -> lift(post.content),
+            _.tags     -> lift(post.tags),
+            _.author   -> lift(post.author),
             _.editedAt -> lift(time)
           )
       )

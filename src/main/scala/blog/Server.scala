@@ -17,16 +17,16 @@ import scala.io.AnsiColor._
 import scala.io.StdIn
 
 object Server extends RestApi {
-  val log: Logger = LoggerFactory.getLogger(this.getClass)
+  val log: Logger     = LoggerFactory.getLogger(this.getClass)
   implicit val system = ActorSystem(Behaviors.empty, "rest-api-crud")
-  implicit val ex = system.executionContext
-  lazy val ctx = new PostgresJAsyncContext(SnakeCase, config.getConfig("app.postgres"))
-  val config: Config = (new AppConfig).config
+  implicit val ex     = system.executionContext
+  lazy val ctx        = new PostgresJAsyncContext(SnakeCase, config.getConfig("app.postgres"))
+  val config: Config  = (new AppConfig).config
 
   def main(args: Array[String]): Unit = {
-    implicit val blogpostFormat = jsonFormat7(Blogpost)
+    implicit val blogpostFormat  = jsonFormat7(Blogpost)
     implicit val postEntryFormat = jsonFormat4(PostEntry)
-    implicit val summaryFormat = jsonFormat3(Summary)
+    implicit val summaryFormat   = jsonFormat3(Summary)
 
     val route =
       concat(
@@ -53,7 +53,7 @@ object Server extends RestApi {
         post {
           path("blog") {
             entity(as[PostEntry]) { entry =>
-              val id = getLatestId
+              val id       = getLatestId
               val postItem = insertPost(id, entry)
               onSuccess(postItem) {
                 case 1 => complete(s"Successfully added ${entry.title} post.")
@@ -100,9 +100,9 @@ object Server extends RestApi {
     println(s"Server ${GREEN}online${RESET} at http://localhost:8080/\nPress RETURN to stop...")
     println("-----------------------------------------------------------------")
 
-    StdIn.readLine() // let it run until user presses return
+    StdIn.readLine()                       // let it run until user presses return
     bindingFuture
-      .flatMap(_.unbind()) // trigger unbinding from the port
+      .flatMap(_.unbind())                 // trigger unbinding from the port
       .onComplete(_ => system.terminate()) // and shutdown when done
   }
 }
